@@ -1,0 +1,11 @@
+$theme-colors: (
+        "dark": #636363
+);
+
+@import "~bootstrap/scss/bootstrap";
+
+body {
+    background-color: black;
+}
+
+

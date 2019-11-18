@@ -1,8 +1,13 @@
 {
     "devDependencies": {
         "@symfony/webpack-encore": "^0.28.0",
+        "bootstrap": "^4.3.1",
         "core-js": "^3.0.0",
+        "jquery": "^3.4.1",
+        "node-sass": "^4.13.0",
+        "popper.js": "^1.16.0",
         "regenerator-runtime": "^0.13.2",
+        "sass-loader": "^7.0.1",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -12,5 +17,10 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
-    }
+    },
+    "name": "wild-series",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/estev217/wild-series.git",
+    "author": "Estevao Fernandes <estevao.fernandes@live.fr>"
 }
