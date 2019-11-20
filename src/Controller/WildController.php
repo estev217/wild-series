@@ -20,7 +20,7 @@ Class WildController extends AbstractController
 
     /**
      * @Route("/wild/show/{slug}", requirements={"slug"="[a-z0-9-]+"},
-     * defaults={"slug"="Article sans Titre"}, name="wild_show")
+     * defaults={"slug"="Aucune série sélectionnée, veuillez choisir une série"}, name="wild_show")
      */
     public function show($slug) :Response
     {
