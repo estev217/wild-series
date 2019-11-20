@@ -17,4 +17,27 @@ Class WildController extends AbstractController
             'website' => 'Wild Séries',
         ]);
     }
+
+    /**
+     * @Route("/wild/show/{slug}", requirements={"slug"="[a-z0-9-]+"},
+     * defaults={"slug"="Article sans Titre"}, name="wild_show")
+     */
+    public function show($slug) :Response
+    {
+        return $this->render('wild/show.html.twig', [
+            'slug' => $slug = ucwords(str_replace('-', ' ', $slug))
+        ]);
+    }
+
+    /**
+     * @Route("/blog/error/{slug}",
+     * requirements={"slug"="[A-Z]+"},
+     * defaults={"slug"="UPPER-CASE-NOT-ALLOWED"},
+     * name="error")
+     */
+    public function error($slug)
+    {
+        // redirection vers la page erreur, correspondant à l'insertion de majuscule dans l'URL
+        return $this->render('blog/error_404.html.twig', ['slug' => $slug]);
+    }
 }
