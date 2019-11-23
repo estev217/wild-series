@@ -8,12 +8,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/wild", name="wild_")
+ */
 Class WildController extends AbstractController
 {
     /**
      * Show all rows from Program's entity
      *
-     * @Route("/index", name="wild_index")
+     * @Route("/index", name="index")
      * @return Response A response instance
      */
     public function index(): Response
@@ -73,7 +76,7 @@ Class WildController extends AbstractController
      *
      * @param string|null $categoryName
      * @return Response
-     * @Route("/wild/category/{categoryName<^[a-z0-9-]+$>}", defaults={"categoryName" = null}, name="show_category")
+     * @Route("/category/{categoryName<^[a-z0-9-]+$>}", defaults={"categoryName" = null}, name="show_category")
      */
     public function showByCategory(?string $categoryName):Response
     {
