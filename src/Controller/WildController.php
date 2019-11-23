@@ -2,6 +2,7 @@
 // src/Controller/WildController.php
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Program;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,5 +66,35 @@ Class WildController extends AbstractController
     {
         // redirection vers la page erreur, correspondant à l'insertion de majuscule dans l'URL
         return $this->render('blog/error_404.html.twig', ['slug' => $slug]);
+    }
+
+    /**
+     * 3 last programs in category
+     *
+     * @param string|null $categoryName
+     * @return Response
+     * @Route("/wild/category/{categoryName<^[a-z0-9-]+$>}", defaults={"categoryName" = null}, name="show_category")
+     */
+    public function showByCategory(?string $categoryName):Response
+    {
+        if (!$categoryName) {
+            throw $this
+                ->createNotFoundException('No category has been find in categorie\'s table.');
+        }
+        $categoryName = preg_replace('/-/', ' ', ucwords(trim(strip_tags($categoryName)), "-"));
+        $category = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->findOneBy(['name' => mb_strtolower($categoryName),]);
+        $programs = $this->getDoctrine()
+            ->getRepository(Program::class)
+            ->findBy(['category' => $category], ['id' => 'DESC'], 3);
+        if (!$programs) {
+            throw $this->createNotFoundException(
+                'No program with '.$categoryName.' category, found in Program\'s table.'
+            );
+        }
+        return $this->render('wild/category.html.twig', [
+            'programs' => $programs,
+        ]);
     }
 }
