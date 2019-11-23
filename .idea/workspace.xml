@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f3b15ce5-da90-459d-bf0e-8571d7192afa" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/WildController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/WildController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wild/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wild/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wild/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wild/show.html.twig" afterDir="false" />
-    </list>
+    <list default="true" id="f3b15ce5-da90-459d-bf0e-8571d7192afa" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +177,7 @@
       <updated>1573999877951</updated>
       <workItem from="1573999879145" duration="8044000" />
       <workItem from="1574066170037" duration="18871000" />
-      <workItem from="1574244483832" duration="26680000" />
+      <workItem from="1574244483832" duration="27406000" />
     </task>
     <servers />
   </component>
