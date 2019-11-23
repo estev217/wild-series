@@ -2,4 +2,17 @@
 
 {% block body %}
 <h1>{{ welcome }}</h1>
+    <ul>
+        <li>
+            <a href="{{ path('show', { 'slug': "walking-dead" }) }}">
+                Testing show() method from WildController with a real program s slug.
+            </a>
+        </li>
+        <br>
+        <li>
+            <a href="{{ path('wild_index') }}">
+                Testing index() method from WildController to view all programs.
+            </a>
+        </li>
+    </ul>
 {% endblock %}
