@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="f3b15ce5-da90-459d-bf0e-8571d7192afa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/WildController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/WildController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Program.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Program.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wild/category.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wild/category.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wild/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wild/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wild/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wild/show.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -142,17 +147,20 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/projet2/bordeaux-201909-php-wildnplay" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates/wild" />
+      <recent name="$PROJECT_DIR$/src/Entity" />
+      <recent name="$PROJECT_DIR$/src/Form" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/Controller" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/templates/wild" />
       <recent name="$PROJECT_DIR$/templates" />
     </key>
@@ -181,7 +189,16 @@
       <updated>1573999877951</updated>
       <workItem from="1573999879145" duration="8044000" />
       <workItem from="1574066170037" duration="18871000" />
-      <workItem from="1574244483832" duration="28515000" />
+      <workItem from="1574244483832" duration="37579000" />
+      <workItem from="1574915569566" duration="6631000" />
+      <workItem from="1574960734014" duration="3151000" />
+      <workItem from="1575040264752" duration="28649000" />
+      <workItem from="1575282631210" duration="310000" />
+      <workItem from="1575283138587" duration="12344000" />
+      <workItem from="1575363978869" duration="60000" />
+      <workItem from="1575390168386" duration="12000" />
+      <workItem from="1575390518736" duration="603000" />
+      <workItem from="1575562717044" duration="7265000" />
     </task>
     <servers />
   </component>

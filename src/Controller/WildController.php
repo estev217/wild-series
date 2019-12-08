@@ -2,8 +2,12 @@
 // src/Controller/WildController.php
 namespace App\Controller;
 
+use App\Entity\Season;
+use App\Entity\Episode;
 use App\Entity\Category;
 use App\Entity\Program;
+use App\Form\CategoryType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,10 +32,11 @@ Class WildController extends AbstractController
         if (!$programs) {
             throw $this->createNotFoundException('No program found in program\'s table.');
         }
+
         return $this->render(
-            'wild/index.html.twig',
-            ['programs' => $programs]
-        );
+            'wild/index.html.twig', [
+                'programs' => $programs,
+        ]);
     }
 
     /**
@@ -50,12 +55,16 @@ Class WildController extends AbstractController
         $program = $this->getDoctrine()
             ->getRepository(Program::class)
             ->findOneBy(['title' => mb_strtolower($slug)]);
+
+        $seasons = $this->getDoctrine()->getRepository(Season::class)->findBy(['program' => $program]);
+
         if (!$program) {
             throw $this->createNotFoundException('No program with '.$slug.' title, found in program\'s table.');
         }
         return $this->render('wild/show.html.twig', [
             'program' => $program,
-            'slug'    => $slug,
+            'seasons' => $seasons,
+            'slug'    => $slug
         ]);
     }
 
@@ -82,7 +91,7 @@ Class WildController extends AbstractController
     {
         if (!$categoryName) {
             throw $this
-                ->createNotFoundException('No category has been find in categorie\'s table.');
+                ->createNotFoundException('No category has been found in categorie\'s table.');
         }
         $categoryName = preg_replace('/-/', ' ', ucwords(trim(strip_tags($categoryName)), "-"));
         $category = $this->getDoctrine()
@@ -97,7 +106,73 @@ Class WildController extends AbstractController
             );
         }
         return $this->render('wild/category.html.twig', [
-            'programs' => $programs,
+            'programs' => $programs
+        ]);
+    }
+
+    /**
+     *
+     * @param string $programTitle
+     * @return Response
+     * @Route("/program/{programTitle<^[a-z0-9-]+$>}", defaults={"programTitle" = null}, name="show_program")
+     */
+    public function showByProgram(?string $programTitle): Response
+    {
+        if (!$programTitle) {
+            throw $this->createNotFoundException('No slug has been sent to find a program in program\'s table.');
+        }
+        $programTitle = preg_replace('/-/', ' ', ucwords(trim(strip_tags($programTitle)), "-"));
+
+        $program = $this->getDoctrine()
+            ->getRepository(Program::class)
+            ->findOneBy(['title' => mb_strtolower($programTitle)]);
+
+        if (!$program) {
+            throw $this->createNotFoundException('No program with '.$programTitle.' title, found in program\'s table.');
+        }
+
+        $seasons = $this->getDoctrine()->getRepository(Season::class)->findBy(['program' => $program]);
+
+        return $this->render('wild/program.html.twig', [
+            'program' => $program,
+            'seasons'   => $seasons
+        ]);
+    }
+
+    /**
+     * @Route("/season/{id}", requirements={"id"="[a-z0-9-]+"}, defaults={"id"="Aucune saison sélectionnée, veuillez choisir une saison"}, name="show_season")
+     */
+    public function showBySeason(int $id)
+    {
+        $season = $this->getDoctrine()
+            ->getRepository(Season::class)
+            ->find($id);
+        if (!$season) {
+            throw $this
+                ->createNotFoundException("Please give us a valid season ID");
+        }
+
+        return $this->render('wild/season.html.twig', [
+            'episodes' => $season->getEpisodes(),
+            'program' => $season->getProgram(),
+            'seasons' => $season,
+        ]);
+    }
+
+    /**
+     * @Route("/episode/{id}", requirements={"id"="^[a-z0-9-]+$"}, defaults={"id"="Aucun épisode sélectionné, veuillez choisir un épisode"}, name="show_episode")
+     */
+    public function showEpisode(Season $season, Program $program, Episode $episode): Response
+    {
+        if (!$episode) {
+            throw $this
+                ->createNotFoundException("Please give us a valid episode ID");
+        }
+
+        return $this->render('wild/episode.html.twig', [
+            'season' => $episode->getSeason(),
+            'program' => $season->getProgram(),
+            'episode' => $episode,
         ]);
     }
 }

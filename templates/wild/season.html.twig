@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ program.title }} Saison {{ seasons.id }}{% endblock %}
+{% block body %}
+<a href="{{ path('wild_show_program') }}/{{ program.title }}">
+    Retour à la fiche détaillée de la série
+</a>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col" class="col-1 text-uppercase text-center text-white">Série</th>
+        <th scope="col" class="col-1 text-uppercase text-center text-white">Saison</th>
+        <th scope="col" class="col-1 text-uppercase text-center text-white">Episode</th>
+        <th scope="col" class="col-3 text-uppercase text-center text-white">Titre</th>
+        <th scope="col" class="col-6 text-uppercase text-center text-white">Synopsis</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for episode in episodes %}
+        <tr>
+            <td class="text-center align-middle text-white">{{ episode.season.program.title }}</td>
+            <td class="text-center align-middle text-white">{{ episode.season.number }}</td>
+            <td class="text-center align-middle text-white">
+                <a href="{{ path('wild_show_episode')}}/{{ episode.id }}">{{ episode.number }}</a>
+            </td>
+            <td class="text-center align-middle text-white">{{ episode.title }}</td>
+            <td class="text-center align-middle text-white">{{ episode.synopsis }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
