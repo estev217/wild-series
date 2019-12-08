@@ -5,11 +5,11 @@
 <a href="{{ path('wild_index') }}">
     Retour aux séries
 </a>
-
+<div class="col-3 mt-3 text-white d-flex justify-content-center text-center">
     {{ form_start(formCategory) }}
 
-    {{ form_widget(formCategory.name) }}
+    {{ form_row(formCategory.name, {'label': 'Add a new category :'}) }}
 
     {{ form_end(formCategory) }}
-
+</div>
 {% endblock %}

@@ -31,7 +31,7 @@ class CategoryController extends AbstractController
              $entityManager->persist($category);
              $entityManager->flush();
 
-            return $this->redirectToRoute('wild_new');
+            return $this->redirectToRoute('wild_category_add');
         }
 
         return $this->render('wild/form.html.twig', [
