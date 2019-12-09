@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Episode index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="col align-self-center">
+        <div class="text-white">
+            <h1 class="text-center">Episode index</h1>
+
+            <table class="table text-white">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col-1 text-uppercase text-center text-white">Id</th>
+                        <th scope="col" class="col-2 text-uppercase text-center text-white">Title</th>
+                        <th scope="col" class="col-1 text-uppercase text-center text-white">Number</th>
+                        <th scope="col" class="col-6 text-uppercase text-center text-white">Synopsis</th>
+                        <th scope="col" class="col-2 text-uppercase text-center text-white">actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for episode in episodes %}
+                    <tr>
+                        <td class="text-center align-middle text-white">{{ episode.id }}</td>
+                        <td class="text-center align-middle text-white">{{ episode.title }}</td>
+                        <td class="text-center align-middle text-white">{{ episode.number }}</td>
+                        <td class="text-center align-middle text-white">{{ episode.synopsis }}</td>
+                        <td class="text-center align-middle text-white">
+                            <a href="{{ path('episode_show', {'id': episode.id}) }}">show</a>
+                            <a href="{{ path('episode_edit', {'id': episode.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-center mb-5">
+                <a href="{{ path('episode_new') }}">Create new</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Program{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="col align-self-center">
+            <div class="text-white">
+                <h1 class="text-center">Create new Program</h1>
+
+                {{ include('program/_form.html.twig') }}
+
+                <a href="{{ path('program_index') }}">back to list</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Episode{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="col align-self-center">
+            <div class="text-white">
+                <h1 class="text-center">Edit Episode</h1>
+
+                {{ include('episode/_form.html.twig', {'button_label': 'Update'}) }}
+
+                <a href="{{ path('episode_show', {'id': episode.id}) }}">Retour à la fiche de l'épisode</a>
+
+                {{ include('episode/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

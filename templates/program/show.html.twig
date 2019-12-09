@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Program{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="col align-self-center">
+            <div class="text-white">
+                <h1 class="text-center">Program</h1>
+
+                <table class="table text-white">
+                    <tbody>
+                        <tr>
+                            <th>Title</th>
+                            <td>{{ program.title }}</td>
+                        </tr>
+                        <tr>
+                            <th>Summary</th>
+                            <td>{{ program.summary }}</td>
+                        </tr>
+                        <tr>
+                            <th>Poster</th>
+                            <td>
+                                <img class="align-self-start w-25" src="{{program.poster}}" alt="{{ program.title }} poster">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Saisons</th>
+                            <td>{% for season in seasons %}
+                                <a href="{{ path('season_show', {'id': season.id}) }}">{{ season.number }}</a>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Acteurs</th>
+                            <td>{% for actor in program.actors %}
+                                    <a href="{{ path('actor_show', {'id': actor.id}) }}">{{ actor.name }}</a>
+                                {% else %}
+                                    <a>Aucun acteur pour cette série.</a>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="d-flex flex-column pb-5">
+            <a href="{{ path('program_index') }}" class="align-self-start p-3">back to list</a>
+
+            <a href="{{ path('program_edit', {'id': program.id}) }}" class="align-self-start p-3">edit</a>
+
+            {{ include('program/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

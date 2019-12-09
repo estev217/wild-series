@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Program index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="col align-self-center">
+        <div class="text-white">
+            <h1 class="text-center">Program index</h1>
+
+            <table class="table text-white">
+                <thead>
+                    <tr>
+                        <th scope="col" class="col-1 text-uppercase text-center text-white">Id</th>
+                        <th scope="col" class="col-2 text-uppercase text-center text-white">Title</th>
+                        <th scope="col" class="col-4 text-uppercase text-center text-white">Summary</th>
+                        <th scope="col" class="col-2 text-uppercase text-center text-white">Poster</th>
+                        <th scope="col" class="col-2 text-uppercase text-center text-white">actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for program in programs %}
+                    <tr>
+                        <td class="text-center align-middle text-white">{{ program.id }}</td>
+                        <td class="text-center align-middle text-white">{{ program.title }}</td>
+                        <td class="text-center align-middle text-white">{{ program.summary }}</td>
+                        <td class="text-center align-middle text-white">
+                            <img class="align-self-start w-75" src="{{program.poster}}" alt="{{ program.title }} poster">
+                        </td>
+                        <td class="text-center align-middle text-white">
+                            <a href="{{ path('program_show', {'id': program.id}) }}">show</a>
+                            <a href="{{ path('program_edit', {'id': program.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="text-center mb-5">
+                <a href="{{ path('program_new') }}">Create new</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
