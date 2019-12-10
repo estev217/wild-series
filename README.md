@@ -11,7 +11,7 @@ Quête Synfony 12 :
  - Editer et supprimer épisode : https://www.loom.com/share/f298aed520ff4810a67939213c891cd6
  - Editer et supprimer saison : https://www.loom.com/share/2e783b927c604acf8fbefeefd5361faa
  - Editer et supprimer série : https://www.loom.com/share/5857d6d219c44b0a958baff21f146917
- - Créer une série, une saison, un épisode: 
+ - Créer une série, une saison, un épisode: https://www.loom.com/share/ef5d74c1af974a92baa19b5d706ca55a
 
 Quête Symfony 13 : https://www.loom.com/share/82ff224c62fa41178759e5e41a442cab
 
