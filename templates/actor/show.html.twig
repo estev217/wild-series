@@ -18,6 +18,22 @@
                             <th>Name</th>
                             <td>{{ actor.name }}</td>
                         </tr>
+                        <tr>
+                            <th>Apparitions</th>
+                            <td>
+                                <ul>
+                                {% for program in actor.programs %}
+                                    <li>
+                                    <a href="{{ path('program_show', {'id': program.id}) }}">{{ program.title }}</a>
+                                    </li>
+                                {% else %}
+                                    <li>
+                                    <a>Aucune série pour cet acteur.</a>
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
