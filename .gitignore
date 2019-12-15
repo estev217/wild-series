@@ -18,6 +18,8 @@
 /.web-server-pid
 ###< symfony/web-server-bundle ###
 
+.idea
+
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/
