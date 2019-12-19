@@ -24,7 +24,7 @@
                                 <ul>
                                 {% for program in actor.programs %}
                                     <li>
-                                    <a href="{{ path('program_show', {'id': program.id}) }}">{{ program.title }}</a>
+                                    <a href="{{ path('program_show', {'slug': program.slug}) }}">{{ program.title }}</a>
                                     </li>
                                 {% else %}
                                     <li>
@@ -40,7 +40,7 @@
             <div class="d-flex flex-column pb-5">
                 <a href="{{ path('actor_index') }}" class="align-self-start p-3">back to list</a>
 
-                <a href="{{ path('actor_edit', {'id': actor.id}) }}" class="align-self-start p-3">edit</a>
+                <a href="{{ path('actor_edit', {'slug': actor.slug}) }}" class="align-self-start p-3">edit</a>
 
                 {{ include('actor/_delete_form.html.twig') }}
             </div>

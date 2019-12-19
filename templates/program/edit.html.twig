@@ -10,7 +10,7 @@
 
                 {{ include('program/_form.html.twig', {'button_label': 'Update'}) }}
 
-                <a href="{{ path('program_show', {'id': program.id}) }}">Retour à la série</a>
+                <a href="{{ path('program_show', {'slug': program.slug}) }}">Retour à la série</a>
 
                 {{ include('program/_delete_form.html.twig') }}
 

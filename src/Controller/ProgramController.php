@@ -10,7 +10,9 @@ use App\Service\Slugify;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mime\Email;
 
 /**
  * @Route("/program")
@@ -29,19 +31,28 @@ class ProgramController extends AbstractController
 
     /**
      * @Route("/new", name="program_new", methods={"GET","POST"})
+     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
-    public function new(Request $request, Slugify $slugify): Response
+    public function new(Request $request, Slugify $slugify, MailerInterface $mailer): Response
     {
         $program = new Program();
+
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $program->setSlug($slugify->generate($program->getTitle()));
+            $slug = $slugify->generate($program->getTitle());
+            $program->setSlug($slug);
             $entityManager->persist($program);
             $entityManager->flush();
+            $email = (new Email())
+                ->from('estevao.fernandes217@gmail.com')
+                ->to('4700460f77-130b80@inbox.mailtrap.io')
+                ->subject('Une nouvelle série vient d\'être publiée !')
+                ->html('<p>Une nouvelle série vient d\'être publiée sur Wild Séries !</p>');
 
+            $sentEmail = $mailer->send($email);
             return $this->redirectToRoute('program_index');
         }
 
@@ -52,7 +63,7 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="program_show", methods={"GET"})
+     * @Route("/{slug}", name="program_show", methods={"GET"})
      */
     public function show(Program $program): Response
     {
@@ -63,14 +74,16 @@ class ProgramController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="program_edit", methods={"GET","POST"})
+     * @Route("/{slug}/edit", name="program_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Program $program): Response
+    public function edit(Request $request, Program $program, Slugify $slugify): Response
     {
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $slug = $slugify->generate($program->getTitle());
+            $program->setSlug($slug);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('program_index');

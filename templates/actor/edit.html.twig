@@ -10,7 +10,7 @@
 
                 {{ include('actor/_form.html.twig', {'button_label': 'Update'}) }}
 
-                <a href="{{ path('actor_show', {'id': actor.id}) }}">Retour à la fiche de l'acteur</a>
+                <a href="{{ path('actor_show', {'slug': actor.slug}) }}">Retour à la fiche de l'acteur</a>
 
                 {{ include('actor/_delete_form.html.twig') }}
             </div>
