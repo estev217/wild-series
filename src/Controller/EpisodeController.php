@@ -41,6 +41,7 @@ class EpisodeController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $slug = $slugify->generate($episode->getTitle());
             $episode->setSlug($slug);
+
             $entityManager->persist($episode);
             $entityManager->flush();
 

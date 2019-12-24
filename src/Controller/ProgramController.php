@@ -44,6 +44,7 @@ class ProgramController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $slug = $slugify->generate($program->getTitle());
             $program->setSlug($slug);
+
             $entityManager->persist($program);
             $entityManager->flush();
             $email = (new Email())

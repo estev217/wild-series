@@ -39,6 +39,7 @@ class ActorController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $slug = $slugify->generate($actor->getName());
             $actor->setSlug($slug);
+
             $entityManager->persist($actor);
             $entityManager->flush();
 
