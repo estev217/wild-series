@@ -1,0 +1,30 @@
+{%  extends 'email_layout.html.twig' %}
+
+{% block header %}
+    <div class="container min-vw-100 bar">
+        <div>
+            <h1 class="text-center text">Wild Series</h1>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="d-flex flex-column">
+            <div>
+            <h1 class="text">Une nouvelle série est en ligne :</h1>
+            </div>
+            <div>
+            <p class="text">{{ program.title }}</p>
+            </div>
+            <div>
+                <a href="http://localhost:8090/program/{{ program.slug }}"><img src="{{ program.poster }}" alt=""></a>
+            </div>
+            <div>
+                <p class="text">Cliquez sur l'affiche ou
+                    <a href="http://localhost:8090/program/{{ program.slug }}">ici</a>
+                    pour aller sur la page de la série !</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
