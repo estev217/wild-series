@@ -26,7 +26,7 @@
                             <th>Episodes</th>
                             <td>
                                 {% for episode in episodes %}
-                                    <a href="{{ path('episode_show', {'id': episode.id}) }}">{{ episode.number }}</a>
+                                    <a href="{{ path('episode_show', {'slug': episode.slug}) }}">{{ episode.number }}</a>
                                 {% endfor %}
                             </td>
                         </tr>
@@ -34,7 +34,7 @@
                 </table>
             </div>
             <div class="d-flex flex-column pb-5">
-                <a href="{{ path('program_show', {'id': program.id}) }}" class="align-self-start p-3">Retour à la série</a>
+                <a href="{{ path('program_show', {'slug': program.slug}) }}" class="align-self-start p-3">Retour à la série</a>
 
                 <a href="{{ path('season_edit', {'id': season.id}) }}" class="align-self-start p-3">edit</a>
 
