@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Notification{% endblock %}</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        .bar {
+            background-color: #313131;
+            padding-left: 5px;
+        }
+        .text {
+            color: white;
+            height: 5%;
+        }
+    </style>
+</head>
+<body>
+<header>
+{% block header %}
+{% endblock %}
+</header>
+{% block body %}
+{% endblock %}
+</body>
+</html>

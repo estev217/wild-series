@@ -48,12 +48,16 @@ class ProgramController extends AbstractController
             $entityManager->persist($program);
             $entityManager->flush();
             $email = (new Email())
-                ->from('estevao.fernandes217@gmail.com')
-                ->to('4700460f77-130b80@inbox.mailtrap.io')
+                ->from($this->getParameter('mailer_from'))
+                ->to($this->getParameter('mailer_from'))
+                /*->from('estevao.fernandes217@gmail.com')
+                ->to('4700460f77-130b80@inbox.mailtrap.io')*/
                 ->subject('Une nouvelle série vient d\'être publiée !')
-                ->html('<p>Une nouvelle série vient d\'être publiée sur Wild Séries !</p>');
+                ->html($this->renderView('program/email/notification.html.twig', [
+                    'program' => $program,
+                ]));
 
-            $sentEmail = $mailer->send($email);
+            $mailer->send($email);
             return $this->redirectToRoute('program_index');
         }
 
