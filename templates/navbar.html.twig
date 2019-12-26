@@ -18,6 +18,16 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('actor_index') }}">Liste des acteurs</a>
             </li>
+            {% if app.user %}
+                <li class="nav-item">
+                {{ app.user.email }}
+                <a class="nav-link" href="{{ path('app_logout') }}"> Se déconnecter</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_login') }}"> Se connecter</a>
+                </li>
+            {% endif %}
         </ul>
         <span class="navbar-text">
         </span>
