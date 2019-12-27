@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3"></div>
+            <form method="post" class="col-6 mt-5 d-flex flex-column justify-content-center">
+
+            <h1 class="h3 mb-5 font-weight-normal text-white text-center">Formulaire d'inscription</h1>
+            <div class="text-white">
+            {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword) }}
+                {{ form_row(registrationForm.agreeTerms) }}
+            </div>
+                <button class="mt-5 btn btn-lg btn-outline-secondary">Je m'inscris</button>
+            {{ form_end(registrationForm) }}
+
+            </form>
+        <div class="col-3"></div>
+    </div>
+</div>
+{% endblock %}

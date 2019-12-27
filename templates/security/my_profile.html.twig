@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6 mt-5 d-flex flex-column justify-content-center card">
+            <div class="text-center border-bottom">
+            <h1>Mes informations personnelles</h1>
+            </div>
+            <div class="text-center mt-3">
+                <p>Mon mail : {{ app.user.email }}</p>
+            </div>
+            <div class="text-center">
+                <p>Mes roles :</p>
+            </div>
+            <div class="text-center">
+                <ul>
+                    {% for role in app.user.roles %}
+                        <li class="ml-5">{{ role }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-3"></div>
+        </div>
+    </div>
+{% endblock %}
