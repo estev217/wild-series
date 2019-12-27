@@ -3,6 +3,7 @@
 {% block title %}New Actor{% endblock %}
 
 {% block body %}
+{% if is_granted('ROLE_ADMIN') %}
     <div class="container">
         <div class="col align-self-center">
             <div class="text-white">
@@ -14,4 +15,5 @@
             </div>
         </div>
     </div>
+{% endif %}
 {% endblock %}

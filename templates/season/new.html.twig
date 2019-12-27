@@ -1,17 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Season{% endblock %}
+{% block title %}Créer une nouvelle saison{% endblock %}
 
 {% block body %}
+{% if is_granted('ROLE_ADMIN') %}
     <div class="container">
         <div class="col align-self-center">
             <div class="text-white">
-                <h1 class="text-center">Create new Season</h1>
+                <h1 class="text-center">Créer une nouvelle saison</h1>
 
                 {{ include('season/_form.html.twig') }}
 
-                <a href="{{ path('season_index') }}">back to list</a>
+                <a href="{{ path('season_index') }}">Retour à la liste des saisons</a>
             </div>
         </div>
     </div>
+{% endif %}
 {% endblock %}
