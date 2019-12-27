@@ -3,19 +3,19 @@
 {% block title %}Episode{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container mt-5">
         <div class="col align-self-center">
             <div class="text-white">
-                <h1 class="text-center">Episode</h1>
+                <h1 class="text-center">Fiche de l'épisode</h1>
 
                 <table class="table text-white">
                     <tbody>
                         <tr>
-                            <th>Title</th>
+                            <th>Titre</th>
                             <td>{{ episode.title }}</td>
                         </tr>
                         <tr>
-                            <th>Number</th>
+                            <th>Numéro</th>
                             <td>{{ episode.number }}</td>
                         </tr>
                         <tr>
@@ -25,13 +25,49 @@
                     </tbody>
                 </table>
             </div>
-            <div class="d-flex flex-column pb-5">
-                <a href="{{ path('season_show', {'id': season.id}) }}" class="align-self-start p-3">Retour à la saison</a>
+            <div class="d-flex flex-column pb-2">
 
-                <a href="{{ path('episode_edit', {'slug': episode.slug}) }}" class="align-self-start p-3">edit</a>
+                <a href="{{ path('episode_edit', {'slug': episode.slug}) }}" class="align-self-start p-3">Modifier les informations</a>
+
+                <a href="{{ path('season_show', {'id': season.id}) }}" class="align-self-start p-3">Retour à la saison</a>
 
                 {{ include('episode/_delete_form.html.twig') }}
             </div>
+
+            {% if app.user %}
+            <div class="container-fluid mb-5 w-50">
+                <div class="d-flex flex-column">
+                    <div>
+                        <h2 class="mt-5 text-white">Laissez votre commentaire:</h2>
+                    </div>
+                    <div class="flex-column d-flex text-white">
+                        {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <button class="btn btn-lg btn-outline-secondary">{{ button_label|default('Poster') }}</button>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="container-fluid mb-5 w-50 card">
+                <div class="d-flex flex-column">
+                    <div>
+                        <h2 class="mt-3 mb-3 text-center border-bottom">Commentaires sur l'épisode:</h2>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                    <ol>
+                        {% for comment in episode.comments %}
+                            <li class="mt-3 border-bottom">
+                                <p>{{ comment.author.username ~ ' Note: ' ~ comment.rate}}</p>
+                                <p>{{ ' Commentaire: ' ~ comment.comment }}</p>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 {% endblock %}
