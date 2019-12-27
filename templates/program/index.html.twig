@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Program index{% endblock %}
+{% block title %}Liste des séries{% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="col align-self-center">
         <div class="text-white">
-            <h1 class="text-center">Program index</h1>
+            <h1 class="text-center">Liste des séries</h1>
 
             <table class="table text-white">
                 <thead>
                     <tr>
                         <th scope="col" class="col-1 text-uppercase text-center text-white">Id</th>
-                        <th scope="col" class="col-2 text-uppercase text-center text-white">Title</th>
-                        <th scope="col" class="col-4 text-uppercase text-center text-white">Summary</th>
-                        <th scope="col" class="col-2 text-uppercase text-center text-white">Poster</th>
-                        <th scope="col" class="col-2 text-uppercase text-center text-white">actions</th>
+                        <th scope="col" class="col-2 text-uppercase text-center text-white">Titre</th>
+                        <th scope="col" class="col-4 text-uppercase text-center text-white">Résumé</th>
+                        <th scope="col" class="col-2 text-uppercase text-center text-white">Affiche</th>
+                        <th scope="col" class="col-2 text-uppercase text-center text-white">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,20 +28,24 @@
                             <img class="align-self-start w-75" src="{{program.poster}}" alt="{{ program.title }} poster">
                         </td>
                         <td class="text-center align-middle text-white">
-                            <a href="{{ path('program_show', {'slug': program.slug}) }}">show</a>
-                            <a href="{{ path('program_edit', {'slug': program.slug}) }}">edit</a>
+                            <a href="{{ path('program_show', {'slug': program.slug}) }}">Voir la fiche de la série</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('program_edit', {'slug': program.slug}) }}">Modifier</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="5">no records found</td>
+                        <td colspan="5">Aucune série trouvée</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
+            {% if is_granted('ROLE_ADMIN') %}
             <div class="text-center mb-5">
-                <a href="{{ path('program_new') }}">Create new</a>
+                <a href="{{ path('program_new') }}">Créer une série</a>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>

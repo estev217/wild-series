@@ -1,41 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Actor index{% endblock %}
+{% block title %}Liste des acteurs{% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="col align-self-center">
         <div class="text-white">
-            <h1 class="text-center">Actor index</h1>
+            <h1 class="text-center">Liste des acteurs</h1>
 
             <table class="table text-white">
                 <thead>
                     <tr>
-                        <th scope="col" class="col-1 text-uppercase text-center text-white">Id</th>
-                        <th scope="col" class="col-1 text-uppercase text-center text-white">Name</th>
-                        <th scope="col" class="col-1 text-uppercase text-center text-white">actions</th>
+                        <th scope="col" class="col-1 text-uppercase text-center text-white">Nom</th>
+                        <th scope="col" class="col-1 text-uppercase text-center text-white">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                 {% for actor in actors %}
                     <tr>
-                        <td class="text-center align-middle text-white">{{ actor.id }}</td>
                         <td class="text-center align-middle text-white">{{ actor.name }}</td>
+
                         <td class="text-center align-middle text-white">
-                            <a href="{{ path('actor_show', {'slug': actor.slug}) }}">show</a>
-                            <a href="{{ path('actor_edit', {'slug': actor.slug}) }}">edit</a>
+                            <a href="{{ path('actor_show', {'slug': actor.slug}) }}">Voir sa fiche détaillée</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('actor_edit', {'slug': actor.slug}) }}">Modifier</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="3">no records found</td>
+                        <td colspan="3">Aucun acteur trouvé</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
+            {% if is_granted('ROLE_ADMIN') %}
             <div class="text-center mb-5">
-                <a href="{{ path('actor_new') }}">Create new</a>
+                <a href="{{ path('actor_new') }}">Créer un acteur</a>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>

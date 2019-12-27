@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Episode index{% endblock %}
+{% block title %}Liste des épisodes{% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="col align-self-center">
         <div class="text-white">
-            <h1 class="text-center">Episode index</h1>
+            <h1 class="text-center">Liste des épisodes</h1>
 
             <table class="table text-white">
                 <thead>
                     <tr>
                         <th scope="col" class="col-1 text-uppercase text-center text-white">Id</th>
-                        <th scope="col" class="col-2 text-uppercase text-center text-white">Title</th>
-                        <th scope="col" class="col-1 text-uppercase text-center text-white">Number</th>
+                        <th scope="col" class="col-2 text-uppercase text-center text-white">Titre</th>
+                        <th scope="col" class="col-1 text-uppercase text-center text-white">Numéro</th>
                         <th scope="col" class="col-6 text-uppercase text-center text-white">Synopsis</th>
-                        <th scope="col" class="col-2 text-uppercase text-center text-white">actions</th>
+                        <th scope="col" class="col-2 text-uppercase text-center text-white">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,20 +26,24 @@
                         <td class="text-center align-middle text-white">{{ episode.number }}</td>
                         <td class="text-center align-middle text-white">{{ episode.synopsis }}</td>
                         <td class="text-center align-middle text-white">
-                            <a href="{{ path('episode_show', {'slug': episode.slug}) }}">show</a>
-                            <a href="{{ path('episode_edit', {'slug': episode.slug}) }}">edit</a>
+                            <a href="{{ path('episode_show', {'slug': episode.slug}) }}">Voir la fiche de l'épisode</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('episode_edit', {'slug': episode.slug}) }}">Modifier</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="5">no records found</td>
+                        <td colspan="5">Aucun épisode trouvé</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
+            {% if is_granted('ROLE_ADMIN') %}
             <div class="text-center mb-5">
-                <a href="{{ path('episode_new') }}">Create new</a>
+                <a href="{{ path('episode_new') }}">Créer un épisode</a>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>

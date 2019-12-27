@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Episode{% endblock %}
+{% block title %}Modifier l'épisode{% endblock %}
 
 {% block body %}
+{% if is_granted('ROLE_ADMIN') %}
     <div class="container">
         <div class="col align-self-center">
             <div class="text-white">
-                <h1 class="text-center">Edit Episode</h1>
+                <h1 class="text-center">Modifier l'épisode</h1>
 
                 {{ include('episode/_form.html.twig', {'button_label': 'Update'}) }}
 
@@ -16,4 +17,5 @@
             </div>
         </div>
     </div>
+{% endif %}
 {% endblock %}

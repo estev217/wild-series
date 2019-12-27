@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Season index{% endblock %}
+{% block title %}Liste des saisons{% endblock %}
 
 {% block body %}
 <div class="container">
     <div class="col align-self-center">
         <div class="text-white">
-            <h1 class="text-center">Season index</h1>
+            <h1 class="text-center">Liste des saisons</h1>
 
             <table class="table text-white">
                 <thead>
                     <tr>
                         <th scope="col" class="col-1 text-uppercase text-center text-white">Id</th>
-                        <th scope="col" class="col-1 text-uppercase text-center text-white">Number</th>
-                        <th scope="col" class="col-1 text-uppercase text-center text-white">Year</th>
-                        <th scope="col" class="col-8 text-uppercase text-center text-white">Description</th>
-                        <th scope="col" class="col-1 text-uppercase text-center text-white">actions</th>
+                        <th scope="col" class="col-1 text-uppercase text-center text-white">Numéro</th>
+                        <th scope="col" class="col-1 text-uppercase text-center text-white">Année</th>
+                        <th scope="col" class="col-8 text-uppercase text-center text-white">Résumé</th>
+                        <th scope="col" class="col-1 text-uppercase text-center text-white">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,20 +26,24 @@
                         <td class="text-center align-middle text-white">{{ season.year }}</td>
                         <td class="text-center align-middle text-white">{{ season.description }}</td>
                         <td class="text-center align-middle text-white">
-                            <a href="{{ path('season_show', {'id': season.id}) }}">show</a>
-                            <a href="{{ path('season_edit', {'id': season.id}) }}">edit</a>
+                            <a href="{{ path('season_show', {'id': season.id}) }}">Voir la fiche de la saison</a>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('season_edit', {'id': season.id}) }}">Modifier</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="5">no records found</td>
+                        <td colspan="5">Aucune saison trouvée</td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
+            {% if is_granted('ROLE_ADMIN') %}
             <div class="text-center mb-5">
-                <a href="{{ path('season_new') }}">Create new</a>
+                <a href="{{ path('season_new') }}">Créer une nouvelle saison</a>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
