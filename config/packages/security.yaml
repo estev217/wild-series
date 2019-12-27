@@ -41,9 +41,4 @@ security:
         - { path: ^/episode/new, roles: ROLE_ADMIN }
         - { path: ^/season/new, roles: ROLE_ADMIN }
         - { path: ^/actor/new, roles: ROLE_ADMIN }
-        - { path: ^/comment/new, roles: ROLE_ADMIN }
-        - { path: ^/program, roles: [ROLE_ADMIN, ROLE_SUBSCRIBER] }
-        - { path: ^/episode, roles: [ROLE_ADMIN, ROLE_SUBSCRIBER] }
-        - { path: ^/season, roles: [ROLE_ADMIN, ROLE_SUBSCRIBER] }
-        - { path: ^/actor, roles: [ROLE_ADMIN, ROLE_SUBSCRIBER] }
-        - { path: ^/comment, roles: [ROLE_ADMIN, ROLE_SUBSCRIBER] }
+        - { path: ^/comment, roles: ROLE_ADMIN }
