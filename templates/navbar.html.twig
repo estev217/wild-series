@@ -25,6 +25,12 @@
                 {{ app.user.email }}
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_profile') }}">Mon profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('comment_index') }}">Mes commentaires</a>
+                </li>
+                <li class="nav-item">
                 <a class="nav-link" href="{{ path('app_logout') }}"> Se déconnecter</a>
                 </li>
             {% else %}
