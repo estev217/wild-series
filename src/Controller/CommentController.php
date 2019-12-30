@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
@@ -19,12 +20,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class CommentController extends AbstractController
 {
     /**
-     * @Route("/", name="comment_index", methods={"GET"})
+     * @Route("/{user}", name="comment_index", methods={"GET"})
+     * @param User $user
+     * @return response
      */
-    public function index(CommentRepository $commentRepository, UserRepository $userRepository): Response
+    public function index(CommentRepository $commentRepository, User $user): Response
     {
-        $user = $userRepository->findBy(['id' => 1 ]);
-
         return $this->render('comment/index.html.twig', [
             'comments' => $commentRepository->findBy(['author' => $user]),
         ]);
