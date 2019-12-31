@@ -75,7 +75,7 @@ class CommentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('comment_index');
+            return $this->redirectToRoute('comment_index', ['user' => $comment->getAuthor()->getId()]);
         }
 
         return $this->render('comment/edit.html.twig', [
@@ -95,6 +95,6 @@ class CommentController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('comment_index');
+        return $this->redirectToRoute('comment_index', ['user' => $comment->getAuthor()->getId()]);
     }
 }
