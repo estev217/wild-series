@@ -11,21 +11,25 @@
             <table class="table text-white">
                 <thead>
                     <tr>
-                        <th scope="col" class="col-1 text-uppercase text-center text-white">Id</th>
                         <th scope="col" class="col-2 text-uppercase text-center text-white">Titre</th>
                         <th scope="col" class="col-4 text-uppercase text-center text-white">Résumé</th>
                         <th scope="col" class="col-2 text-uppercase text-center text-white">Affiche</th>
+                        <th scope="col" class="col-2 text-uppercase text-center text-white">Acteurs</th>
                         <th scope="col" class="col-2 text-uppercase text-center text-white">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                 {% for program in programs %}
                     <tr>
-                        <td class="text-center align-middle text-white">{{ program.id }}</td>
                         <td class="text-center align-middle text-white">{{ program.title }}</td>
                         <td class="text-center align-middle text-white">{{ program.summary }}</td>
                         <td class="text-center align-middle text-white">
                             <img class="align-self-start w-75" src="{{program.poster}}" alt="{{ program.title }} poster">
+                        </td>
+                        <td class="text-center align-middle text-white">
+                        {% for actor in program.actors %}
+                            <p>{{ actor.name }}</p>
+                        {% endfor %}
                         </td>
                         <td class="text-center align-middle text-white">
                             <a href="{{ path('program_show', {'slug': program.slug}) }}">Voir la fiche de la série</a>

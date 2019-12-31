@@ -34,7 +34,7 @@
                         <tr>
                             <th>Acteurs</th>
                             <td>{% for actor in program.actors %}
-                                    <a href="{{ path('actor_show', {'id': actor.slug}) }}">{{ actor.name }}</a>
+                                    <a href="{{ path('actor_show', {'slug': actor.slug}) }}" class="mr-2">{{ actor.name }}</a>
                                 {% else %}
                                     <a>Aucun acteur pour cette série.</a>
                                 {% endfor %}
