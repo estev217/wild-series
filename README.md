@@ -25,3 +25,6 @@ Quête Symfony 17 : https://www.loom.com/share/e81633d57a1240b59096c21b97b53925
 
 Quête Symfony 18 : https://www.loom.com/share/80da26aca25245ad8338e612824bc714
 
+Quête Symfony 19 : https://www.loom.com/share/d15fd1459d87498bae46eb14e2be8f55
+
+Quête Symfony 20 : https://www.loom.com/share/d1ae5f013d824c0982538f9b16206fe0
