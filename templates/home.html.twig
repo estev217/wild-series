@@ -1,24 +1,13 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-<h1>{{ welcome }}</h1>
-    <ul>
-        <li>
-            <a href="{{ path('wild_show', { 'slug': "walking-dead" }) }}">
-                Testing show() method from WildController with a real program s slug.
-            </a>
-        </li>
-        <br>
-        <li>
-            <a href="{{ path('wild_index') }}">
-                Testing index() method from WildController to view all programs.
-            </a>
-        </li>
-        <br>
-        <li>
-            <a href="{{ path('wild_show_category') }}/horreur">
-                Last 3 horror series.
-            </a>
-        </li>
-    </ul>
+<h2 class="mt-5 ml-5 text-white"> Nos dernières séries</h2>
+{% for program in programs %}
+    <div class="ml-5 mr-5 w-50 card">
+        <a class="ml-2 mt-2 text-dark" href="{{ path('wild_show_program', {'slug': program.slug }) }}">{{ program.title }} ( {{ program.category.name }} )</a>
+        <p class="m-3">{{ program.summary }}</p>
+    </div>
+{% else %}
+    Aucune série trouvée.
+{% endfor %}
 {% endblock %}
