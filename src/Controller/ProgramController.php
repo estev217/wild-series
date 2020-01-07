@@ -7,12 +7,16 @@ use App\Entity\Season;
 use App\Form\ProgramType;
 use App\Repository\ProgramRepository;
 use App\Service\Slugify;
+use Doctrine\ORM\Query\Expr\From;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Mime\Email;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+/*require '../../vendor/autoload.php';*/
 
 /**
  * @Route("/program")
@@ -31,14 +35,61 @@ class ProgramController extends AbstractController
 
     /**
      * @Route("/new", name="program_new", methods={"GET","POST"})
-     * @throws \Symfony\Component\Mailer\Exception\TransportExceptionInterface
      */
-    public function new(Request $request, Slugify $slugify, MailerInterface $mailer): Response
+    public function new(Request $request, Slugify $slugify): Response
     {
         $program = new Program();
 
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
+
+        $mail = new PHPMailer(true);
+        try {
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            /* Tells PHPMailer to use SMTP. */
+            $mail->isSMTP();
+            /* SMTP server address. */
+            $mail->Host = 'smtp-mail.outlook.com';
+            /* Use SMTP authentication. */
+            $mail->SMTPAuth = true;
+            /* SMTP authentication username. */
+            $mail->Username = 'adressedetest2020@outlook.fr';
+            /* SMTP authentication password. */
+            $mail->Password = 'monadresse2020';
+            /* Set the encryption system. */
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            /* Set the SMTP port. */
+            $mail->Port = 587;
+
+            $mail->setFrom('adressedetest2020@outlook.fr');
+            $mail->addAddress('adressedetest2020@outlook.fr');
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Force';
+            $mail->Body = 'There is a great disturbance in the <strong>Weakness</strong>';
+            $mail->AltBody = 'There is a great disturbance in the Force.';
+
+            /* Disable some SSL checks. */
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
+
+            $mail->send();
+            echo 'Mail has been sent';
+        }
+        catch (Exception $e)
+        {
+            echo $e->errorMessage();
+        }
+        catch (\Exception $e)
+        {
+            echo $e->getMessage();
+        }
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
@@ -47,17 +98,13 @@ class ProgramController extends AbstractController
 
             $entityManager->persist($program);
             $entityManager->flush();
-            $email = (new Email())
-                ->from($this->getParameter('mailer_from'))
-                ->to($this->getParameter('mailer_from'))
-                /*->from('estevao.fernandes217@gmail.com')
-                ->to('4700460f77-130b80@inbox.mailtrap.io')*/
-                ->subject('Une nouvelle série vient d\'être publiée !')
-                ->html($this->renderView('program/email/notification.html.twig', [
-                    'program' => $program,
-                ]));
 
-            $mailer->send($email);
+
+
+                /*->html($this->renderView('program/email/notification.html.twig', [
+                    'program' => $program,
+                ]));*/
+
             return $this->redirectToRoute('program_index');
         }
 
@@ -113,4 +160,5 @@ class ProgramController extends AbstractController
 
         return $this->redirectToRoute('program_index');
     }
+
 }
