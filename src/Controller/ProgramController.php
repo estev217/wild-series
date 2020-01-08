@@ -98,7 +98,7 @@ class ProgramController extends AbstractController
                     'program' => $program,
                 ]));*/
 
-            /*return $this->redirectToRoute('program_index');*/
+            return $this->redirectToRoute('program_index');
         }
 
         return $this->render('program/new.html.twig', [
