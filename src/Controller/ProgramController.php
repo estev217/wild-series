@@ -55,8 +55,10 @@ class ProgramController extends AbstractController
             $entityManager->flush();
 
             $mail = new PHPMailer(true);
-            try {
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+
+                /*Uncomment next line to see SMTP debug after process*/
+                /*$mail->SMTPDebug = SMTP::DEBUG_SERVER;*/
+
                 /* Tells PHPMailer to use SMTP. */
                 $mail->isSMTP();
                 /* SMTP server address. */
@@ -76,8 +78,8 @@ class ProgramController extends AbstractController
                 $mail->addAddress($form['Email']->getData());
 
                 $mail->isHTML(true);
-                $mail->Subject = 'Force';
-                $mail->Body = 'There is a big big disturbance in the <strong>Force</strong>';
+                $mail->Subject = $form['title']->getData();
+                $mail->Body = $form['summary']->getData();
                 $mail->AltBody = 'There is a great disturbance in the Force.';
 
                 /* Disable some SSL checks. */
@@ -91,22 +93,12 @@ class ProgramController extends AbstractController
 
                 $mail->send();
                 echo 'Mail has been sent';
-            }
-            catch (Exception $e)
-            {
-                echo $e->errorMessage();
-            }
-            catch (\Exception $e)
-            {
-                echo $e->getMessage();
-            }
-
 
                 /*->html($this->renderView('program/email/notification.html.twig', [
                     'program' => $program,
                 ]));*/
 
-            return $this->redirectToRoute('program_index');
+            /*return $this->redirectToRoute('program_index');*/
         }
 
         return $this->render('program/new.html.twig', [
