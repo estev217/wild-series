@@ -43,55 +43,10 @@ class ProgramController extends AbstractController
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
 
-        $mail = new PHPMailer(true);
-        try {
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-            /* Tells PHPMailer to use SMTP. */
-            $mail->isSMTP();
-            /* SMTP server address. */
-            $mail->Host = 'smtp-mail.outlook.com';
-            /* Use SMTP authentication. */
-            $mail->SMTPAuth = true;
-            /* SMTP authentication username. */
-            $mail->Username = 'adressedetest2020@outlook.fr';
-            /* SMTP authentication password. */
-            $mail->Password = 'monadresse2020';
-            /* Set the encryption system. */
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            /* Set the SMTP port. */
-            $mail->Port = 587;
-
-            $mail->setFrom('adressedetest2020@outlook.fr');
-            $mail->addAddress('adressedetest2020@outlook.fr');
-
-            $mail->isHTML(true);
-            $mail->Subject = 'Force';
-            $mail->Body = 'There is a great disturbance in the <strong>Weakness</strong>';
-            $mail->AltBody = 'There is a great disturbance in the Force.';
-
-            /* Disable some SSL checks. */
-            $mail->SMTPOptions = array(
-                'ssl' => array(
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
-                    'allow_self_signed' => true
-                )
-            );
-
-            $mail->send();
-            echo 'Mail has been sent';
-        }
-        catch (Exception $e)
-        {
-            echo $e->errorMessage();
-        }
-        catch (\Exception $e)
-        {
-            echo $e->getMessage();
-        }
 
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $password = $form['Password']->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $slug = $slugify->generate($program->getTitle());
             $program->setSlug($slug);
@@ -99,6 +54,52 @@ class ProgramController extends AbstractController
             $entityManager->persist($program);
             $entityManager->flush();
 
+            $mail = new PHPMailer(true);
+            try {
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                /* Tells PHPMailer to use SMTP. */
+                $mail->isSMTP();
+                /* SMTP server address. */
+                $mail->Host = 'smtp-mail.outlook.com';
+                /* Use SMTP authentication. */
+                $mail->SMTPAuth = true;
+                /* SMTP authentication username. */
+                $mail->Username = $form['Email']->getData();
+                /* SMTP authentication password. */
+                $mail->Password = $form['Password']->getData();
+                /* Set the encryption system. */
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                /* Set the SMTP port. */
+                $mail->Port = 587;
+
+                $mail->setFrom($form['Email']->getData());
+                $mail->addAddress($form['Email']->getData());
+
+                $mail->isHTML(true);
+                $mail->Subject = 'Force';
+                $mail->Body = 'There is a big big disturbance in the <strong>Force</strong>';
+                $mail->AltBody = 'There is a great disturbance in the Force.';
+
+                /* Disable some SSL checks. */
+                $mail->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
+
+                $mail->send();
+                echo 'Mail has been sent';
+            }
+            catch (Exception $e)
+            {
+                echo $e->errorMessage();
+            }
+            catch (\Exception $e)
+            {
+                echo $e->getMessage();
+            }
 
 
                 /*->html($this->renderView('program/email/notification.html.twig', [
