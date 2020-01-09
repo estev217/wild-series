@@ -15,8 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-/*require '../../vendor/autoload.php';*/
+
 
 /**
  * @Route("/program")
@@ -36,7 +37,7 @@ class ProgramController extends AbstractController
     /**
      * @Route("/new", name="program_new", methods={"GET","POST"})
      */
-    public function new(Request $request, Slugify $slugify): Response
+    public function new(Request $request, Slugify $slugify, ParameterBagInterface $parameterBag): Response
     {
         $program = new Program();
 
@@ -46,7 +47,6 @@ class ProgramController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $form['Password']->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $slug = $slugify->generate($program->getTitle());
             $program->setSlug($slug);
@@ -66,16 +66,16 @@ class ProgramController extends AbstractController
                 /* Use SMTP authentication. */
                 $mail->SMTPAuth = true;
                 /* SMTP authentication username. */
-                $mail->Username = $form['Email']->getData();
+                $mail->Username = $this->getParameter('mail_from');
                 /* SMTP authentication password. */
-                $mail->Password = $form['Password']->getData();
+                $mail->Password = $this->getParameter('mail_password');
                 /* Set the encryption system. */
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 /* Set the SMTP port. */
                 $mail->Port = 587;
 
-                $mail->setFrom($form['Email']->getData());
-                $mail->addAddress($form['Email']->getData());
+                $mail->setFrom($this->getParameter('mail_from'));
+                $mail->addAddress($form['Receiver']->getData());
 
                 $mail->isHTML(true);
                 $mail->Subject = $form['title']->getData();

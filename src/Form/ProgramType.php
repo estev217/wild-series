@@ -25,8 +25,9 @@ class ProgramType extends AbstractType
                 'expanded' => true,
                 'by_reference' => false
             ])
-            ->add('Email', null, ['mapped' => false])
-            ->add('Password', null, ['mapped' => false]);
+            /*->add('Email', null, ['mapped' => false])*/
+            /*->add('Password', null, ['mapped' => false])*/
+            ->add('Receiver', null, ['mapped' => false]);
         ;
     }
 
