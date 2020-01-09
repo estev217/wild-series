@@ -1,5 +1,13 @@
 # wild-series
 
+for PHP mailer (mailertest branch)
+in env.local add:
+
+###> PHPMailer/PHPMailer ###
+MAIL_FROM=mailadress
+MAIL_PASSWORD=mailadressepassword
+###< PHPMailer/PHPMailer ###
+
 Quête Symfony 9 : https://www.loom.com/share/f5b2e664775e4dd7bc42f3856530d228
 
 Quête Symfony 10 : https://www.loom.com/share/4f19c565d28c4b0ab5225ae46cf29ac3
